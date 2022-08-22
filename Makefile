@@ -1,5 +1,7 @@
 OS = darwin freebsd linux openbsd
 ARCHS = 386 arm amd64 arm64
+IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/larmor-cloud/webhook
+IMAGE_VERSION=1.0.0
 
 .DEFAULT_GOAL := help
 
@@ -42,3 +44,7 @@ deps: ## Install dependencies using go get
 clean: ## Remove building artifacts
 	rm -rf build
 	rm -f webhook
+
+image:
+	docker build -t $(IMAGE_NAME):$(IMAGE_VERSION) .
+	docker push $(IMAGE_NAME):$(IMAGE_VERSION)
